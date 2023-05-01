@@ -1,41 +1,35 @@
 package com.example.countries.adapter
 
 import android.view.LayoutInflater
+import android.view.RoundedCorner
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.countries.databinding.CountryListItemBinding
-import com.example.countries.model.Post
+import com.example.countries.models.CountriesResponse
+import com.example.countries.models.CountriesResponseItem
 
-class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
+class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>()  {
 
-    inner class CountryViewHolder(val binding: CountryListItemBinding) : ViewHolder(binding.root)
+    inner class CountryViewHolder(val binding: CountryListItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
-    private val diffCallback = object : DiffUtil.ItemCallback<Post>() {
+    private val differCallBack = object : DiffUtil.ItemCallback<CountriesResponseItem>() {
 
-        override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-            return oldItem.name == newItem.name
+        override fun areItemsTheSame(oldItem: CountriesResponseItem, newItem: CountriesResponseItem): Boolean {
+            return oldItem.name?.official == newItem.name?.official
         }
 
-        override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
+        override fun areContentsTheSame(oldItem: CountriesResponseItem, newItem: CountriesResponseItem): Boolean {
             return oldItem == newItem
         }
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
-    var countryList: List<Post>
-        get() = differ.currentList
-        set(value) {differ.submitList(value)}
-
-
-
-    override fun getItemCount() = countryList.size
-
+    val differ = AsyncListDiffer(this, differCallBack)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         return CountryViewHolder(CountryListItemBinding.inflate(
@@ -46,15 +40,25 @@ class CountryAdapter : RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() 
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        val country = countryList[position]
-        holder.binding.apply {
-            Glide.with(holder.itemView).load(country.flag).into(ivFlag)
+        val country = differ.currentList[position]
 
-            tvCountry.text = country.name
-            tvCapital.text = country.capital
+        holder.binding.apply {
+
+            Glide.with(holder.itemView)
+                .load(country.flags?.png)
+                .transform(RoundedCorners(7))
+                .into(ivFlag)
+
+            tvCountryName.text = country.name?.common.toString()
+            tvCapital.text = country.capital.toString()
 
         }
     }
 
+    override fun getItemCount(): Int {
+        return differ.currentList.size
     }
+
+
+}
 

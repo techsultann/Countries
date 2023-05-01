@@ -1,11 +1,14 @@
 package com.example.countries.api
 
-import com.example.countries.model.Post
+import com.example.countries.models.CountriesResponse
+import com.example.countries.models.CountriesResponseItem
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface CountryApi {
 
-    @GET("v3.1/all")
-    fun getPost(): Response<Post>
+    @GET("all")
+    fun getCountries(): Call<CountriesResponseItem>
 }
