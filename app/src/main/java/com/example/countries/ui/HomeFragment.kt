@@ -49,16 +49,13 @@ class HomeFragment : Fragment() {
 
         binding.rvCountry.apply {
             layoutManager = LinearLayoutManager(activity)
-            setHasFixedSize(true)
-            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.VERTICAL) {})
-
 
             adapter = countryAdapter
 
             countryViewModel.countryResult().observe(viewLifecycleOwner) { countryList ->
 
                 if (countryList != null) {
-                    countryAdapter.differ.currentList
+                    countryAdapter.differ.submitList(countryList)
                 }
             }
 
