@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.DetailsFragment">
 
+    <ImageView
+        android:id="@+id/imgArrowBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvCountryName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Country"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imgArrowBack"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/dialing_format"
@@ -30,16 +52,16 @@
         app:layout_constraintTop_toBottomOf="@+id/time_zone" />
 
     <ImageView
-        android:id="@+id/img_flag"
+        android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="180dp"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:src="@android:drawable/ic_dialog_alert"
+        app:layout_constraintTop_toBottomOf="@id/imgArrowBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
     <TextView
         android:id="@+id/tvPopulation"
@@ -50,7 +72,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/population"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/img_flag" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/tvRegion"
@@ -103,7 +125,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/ethnic_group"
+        android:text="UN member:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOfficialLanguage" />
 
@@ -114,7 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/religion"
+        android:text="Postal Code:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ethnicGroup" />
 
@@ -169,7 +191,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/gdp"
+        android:text="Land Locked"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_currency" />
 
@@ -272,24 +294,24 @@
         app:layout_constraintTop_toTopOf="@+id/tvOfficialLanguage" />
 
     <TextView
-        android:id="@+id/ethnic_group"
+        android:id="@+id/un_member"
         style="@style/Theme.Countries.TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/ethnic_group"
+        android:text="UN member"
         app:layout_constraintStart_toEndOf="@+id/ethnicGroup"
         app:layout_constraintTop_toBottomOf="@+id/tvOfficialLanguage" />
 
     <TextView
-        android:id="@+id/religion"
+        android:id="@+id/postal_code"
         style="@style/Theme.Countries.TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/religion"
+        android:text="Postal Code"
         app:layout_constraintStart_toEndOf="@+id/tv_religion"
         app:layout_constraintTop_toBottomOf="@+id/ethnicGroup" />
 
@@ -302,7 +324,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/government"
         app:layout_constraintStart_toEndOf="@+id/tvGovernment"
-        app:layout_constraintTop_toBottomOf="@+id/religion" />
+        app:layout_constraintTop_toBottomOf="@+id/postal_code" />
 
     <TextView
         android:id="@+id/independence"
@@ -337,13 +359,13 @@
         app:layout_constraintTop_toBottomOf="@+id/area" />
 
     <TextView
-        android:id="@+id/gdp"
+        android:id="@+id/land_locked"
         style="@style/Theme.Countries.TextView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/gdp"
+        android:text="Land Locked"
         app:layout_constraintStart_toEndOf="@+id/tv_gdp"
         app:layout_constraintTop_toBottomOf="@+id/tv_currency" />
 

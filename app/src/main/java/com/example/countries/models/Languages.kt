@@ -1,8 +1,11 @@
 package com.example.countries.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Languages(
     @SerializedName("afr")
     val afr: String?,
@@ -310,4 +313,4 @@ data class Languages(
     val zib: String?,
     @SerializedName("zul")
     val zul: String?
-)
+) : Parcelable

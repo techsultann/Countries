@@ -1,8 +1,15 @@
 package com.example.countries.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.RawValue
+import kotlinx.parcelize.IgnoredOnParcel
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
+import java.util.Currency
 
+@Parcelize
 data class CountriesResponseItem(
     @SerializedName("altSpellings")
     val altSpellings: List<String>?,
@@ -13,9 +20,9 @@ data class CountriesResponseItem(
     @SerializedName("capital")
     val capital: List<String>?,
     @SerializedName("capitalInfo")
-    val capitalInfo: CapitalInfo?,
+    val capitalInfo: @RawValue CapitalInfo?,
     @SerializedName("car")
-    val car: Car?,
+    val car: @RawValue Car?,
     @SerializedName("cca2")
     val cca2: String?,
     @SerializedName("cca3")
@@ -25,35 +32,32 @@ data class CountriesResponseItem(
     @SerializedName("cioc")
     val cioc: String?,
     @SerializedName("coatOfArms")
-    val coatOfArms: CoatOfArms?,
+    val coatOfArms: @RawValue CoatOfArms?,
     @SerializedName("continents")
     val continents: List<String>?,
-    @SerializedName("currencies")
     val currencies: Currencies?,
     @SerializedName("demonyms")
-    val demonyms: Demonyms?,
+    val demonyms: @RawValue Demonyms?,
     @SerializedName("fifa")
     val fifa: String?,
-    @SerializedName("flag")
     val flag: String?,
     @SerializedName("flags")
-    val flags: Flags?,
+    val flags: @RawValue Flags?,
     @SerializedName("gini")
-    val gini: Gini?,
+    val gini: @RawValue Gini?,
     @SerializedName("idd")
-    val idd: Idd?,
+    val idd: @RawValue Idd?,
     @SerializedName("independent")
     val independent: Boolean?,
     @SerializedName("landlocked")
     val landlocked: Boolean?,
-    @SerializedName("languages")
-    val languages: Languages?,
+    val languages: HashMap<String, String>? = HashMap(),
     @SerializedName("latlng")
     val latlng: List<Double>?,
     @SerializedName("maps")
-    val maps: Maps?,
+    val maps: @RawValue Maps?,
     @SerializedName("name")
-    val name: Name?,
+    val name: @RawValue Name?,
     @SerializedName("population")
     val population: Int?,
     @SerializedName("postalCode")
@@ -74,4 +78,4 @@ data class CountriesResponseItem(
     val translations: Translations?,
     @SerializedName("unMember")
     val unMember: Boolean?
-)
+) : Parcelable, Serializable

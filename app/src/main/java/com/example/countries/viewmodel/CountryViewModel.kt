@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.example.countries.repository.CountryRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import retrofit2.http.Query
 
 
 class CountryViewModel(
@@ -14,6 +15,9 @@ class CountryViewModel(
 
 
         fun countryResult() = repository.getCountryResultLiveData()
+
+    fun searchCountry(query: String) = repository.searchCountry(query)
+    fun searchCountryResult() = repository.searchCountryLiveData()
 
 
 }

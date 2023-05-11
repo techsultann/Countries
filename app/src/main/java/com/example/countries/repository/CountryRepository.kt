@@ -11,6 +11,7 @@ class CountryRepository {
 
     private val  countryService = RetrofitInstance.api
     private val countryLiveData : MutableLiveData<List<CountriesResponseItem>?> = MutableLiveData()
+    private val searchCountryLiveData : MutableLiveData<List<CountriesResponseItem>?> = MutableLiveData()
 
 
     init {
@@ -25,7 +26,8 @@ class CountryRepository {
                      response: Response<List<CountriesResponseItem>>
                  ) {
                      if (response.body() != null) {
-                         countryLiveData.postValue(response.body())
+                         val sorted = response.body()!!.sortedBy { it.name!!.common }
+                         countryLiveData.postValue(sorted)
 
                      }
 
@@ -42,8 +44,41 @@ class CountryRepository {
 
     }
 
+    fun searchCountry(query: String) {
+
+        countryService.searchCountry(query).enqueue(
+            object : Callback<List<CountriesResponseItem>> {
+                override fun onResponse(
+                    call: Call<List<CountriesResponseItem>>,
+                    response: Response<List<CountriesResponseItem>>
+                ) {
+                    if (response.isSuccessful) {
+
+                        searchCountryLiveData.postValue(response.body())
+
+
+                    } else {
+                        // Handle error response
+                    }
+                }
+
+
+                override fun onFailure(call: Call<List<CountriesResponseItem>>, t: Throwable) {
+                    // Handle network failure
+                    searchCountryLiveData.postValue(null)
+                }
+
+            }
+        )
+    }
+
+
     fun getCountryResultLiveData() : MutableLiveData<List<CountriesResponseItem>?> {
         return countryLiveData
 
+    }
+
+    fun searchCountryLiveData() : MutableLiveData<List<CountriesResponseItem>?> {
+        return countryLiveData
     }
 }

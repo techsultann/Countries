@@ -1,8 +1,11 @@
 package com.example.countries.models
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Currencies(
     @SerializedName("AED")
     val aED: AED?,
@@ -328,4 +331,4 @@ data class Currencies(
     val zMW: ZMW?,
     @SerializedName("ZWL")
     val zWL: ZWL?
-)
+) : Parcelable
